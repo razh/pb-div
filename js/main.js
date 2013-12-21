@@ -89,14 +89,21 @@
     this.vx = randomSign() * randomInt( 20, 100 );
     this.vy = randomSign() * randomInt( 20, 100 );
 
-    this.el.addEventListener( 'mousedown', function() {
+    this.clickHandler = function() {
       var element = new Element({
         x: this.x,
         y: this.y
       });
+      console.log('msg')
 
       anim.elements.push( element );
-    }.bind( this ));
+    }.bind( this );
+
+    if ( window.ontouchstart !== undefined ) {
+      this.el.addEventListener( 'touchstart',  this.clickHandler );
+    } else {
+      this.el.addEventListener( 'mousedown',  this.clickHandler );
+    }
   }
 
   Element.random = function() {
