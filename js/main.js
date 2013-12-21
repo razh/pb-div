@@ -75,6 +75,8 @@
     }
 
     // Only so we can determine the element dimensions.
+    // This heavily impacts performance if we are appending >500 elements.
+    // Element in document fragments get styles computed.
     document.body.appendChild( this.el );
 
     this.x = x;
@@ -94,7 +96,6 @@
         x: this.x,
         y: this.y
       });
-      console.log('msg')
 
       anim.elements.push( element );
     }.bind( this );
