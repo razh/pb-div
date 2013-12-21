@@ -82,6 +82,9 @@
     this.x = x;
     this.y = y;
 
+    // Prevent initial rendering at (0, 0) on iOS devices.
+    this.setTransform();
+
     var computedStyle = window.getComputedStyle( this.el );
     // Assume that width/height don't change.
     this.width = parseFloat( computedStyle.width );
@@ -119,6 +122,7 @@
       return;
     }
 
+
     var x = this.x;
     var y = this.y;
     var width = this.width;
@@ -153,6 +157,10 @@
     this.x = x;
     this.y = y;
 
+    this.setTransform();
+  };
+
+  Element.prototype.setTransform = function() {
     var transform = 'translate3d(' +
       this.x + 'px, ' +
       this.y + 'px, ' +
