@@ -1,3 +1,15 @@
+/**
+ * Optimizations:
+ *
+ * - Use only CSS translates with translateZ(0) to avoid repainting.
+ * - Cache window/element dimensions to save on lookup time (profile revealed
+ *   significant performance increase in Element's update() method).
+ *
+ * Optimizations that did not work:
+ *
+ * - Only updating transform if the element had moved at least some minimum distance.
+ */
+
 (function( window, document, undefined ) {
   'use strict';
 
@@ -62,6 +74,7 @@
       this.el = document.createElement( 'div' );
     }
 
+    // Only so we can determine the element dimensions.
     document.body.appendChild( this.el );
 
     this.x = x;
