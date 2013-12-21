@@ -21,7 +21,7 @@
 
   // Same utilities. Sorry about the DRY.
   function randomInt( min, max ) {
-    return min + Math.random() * ( max - min );
+    return Math.round( min + Math.random() * ( max - min ) );
   }
 
   function randomSign() {

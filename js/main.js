@@ -19,7 +19,7 @@
   // Utility functions.
   // In the range [min, max).
   function randomInt( min, max ) {
-    return min + Math.random() * ( max - min );
+    return Math.round( min + Math.random() * ( max - min ) );
   }
 
   function randomSign() {
