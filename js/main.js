@@ -32,9 +32,17 @@
     this.running = true;
 
     this.elements = [];
+
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
   }
 
   anim = new Animation();
+
+  window.addEventListener( 'resize', function() {
+    anim.width = window.innerWidth;
+    anim.height = window.innerHeight;
+  });
 
 
   function Element( options ) {
@@ -65,8 +73,8 @@
     this.height = parseFloat( computedStyle.height );
 
 
-    this.vx = randomSign() * randomInt( 20, 50 );
-    this.vy = randomSign() * randomInt( 20, 50 );
+    this.vx = randomSign() * randomInt( 20, 100 );
+    this.vy = randomSign() * randomInt( 20, 100 );
 
     this.el.addEventListener( 'mousedown', function() {
       var element = new Element({
@@ -90,32 +98,39 @@
       return;
     }
 
+    var x = this.x;
+    var y = this.y;
     var width = this.width;
     var height = this.height;
+    var windowWidth = anim.width;
+    var windowHeight = anim.height;
 
-    this.x += this.vx * dt;
-    this.y += this.vy * dt;
+    x += this.vx * dt;
+    y += this.vy * dt;
 
     // Keep everything in bounds with simple Pong physics.
-    if ( this.x < 0 ) {
-      this.x = 0;
+    if ( x < 0 ) {
+      x = 0;
       this.vx = -this.vx;
     }
 
-    if ( this.x + width > window.innerWidth ) {
-      this.x = window.innerWidth - width;
+    if ( x + width > windowWidth ) {
+      x = windowWidth - width;
       this.vx = -this.vx;
     }
 
-    if ( this.y < 0 ) {
-      this.y = 0;
+    if ( y < 0 ) {
+      y = 0;
       this.vy = -this.vy;
     }
 
-    if ( this.y + height > window.innerHeight ) {
-      this.y = window.innerHeight - height;
+    if ( y + height > windowHeight ) {
+      y = windowHeight - height;
       this.vy = -this.vy;
     }
+
+    this.x = x;
+    this.y = y;
 
     var transform = 'translate3d(' +
       this.x + 'px, ' +
