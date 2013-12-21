@@ -54,19 +54,27 @@
       this.el = document.createElement( 'div' );
     }
 
+    document.body.appendChild( this.el );
+
     this.x = x;
     this.y = y;
 
-    this.vx = randomSign() * randomInt( 200, 300 );
-    this.vy = randomSign() * randomInt( 200, 300 );
+    var computedStyle = window.getComputedStyle( this.el );
+    // Assume that width/height don't change.
+    this.width = parseFloat( computedStyle.width );
+    this.height = parseFloat( computedStyle.height );
+
+
+    this.vx = randomSign() * randomInt( 20, 50 );
+    this.vy = randomSign() * randomInt( 20, 50 );
 
     this.el.addEventListener( 'mousedown', function() {
       var element = new Element({
         x: this.x,
         y: this.y
       });
+
       anim.elements.push( element );
-      document.body.appendChild( element.el );
     }.bind( this ));
   }
 
@@ -82,71 +90,41 @@
       return;
     }
 
-    var x = this.x;
-    var y = this.y;
     var width = this.width;
     var height = this.height;
 
-    x += this.vx * dt;
-    y += this.vy * dt;
+    this.x += this.vx * dt;
+    this.y += this.vy * dt;
 
     // Keep everything in bounds with simple Pong physics.
-    if ( x < 0 ) {
-      x = 0;
+    if ( this.x < 0 ) {
+      this.x = 0;
       this.vx = -this.vx;
     }
 
-    if ( x + width > window.innerWidth ) {
-      x = window.innerWidth - width;
+    if ( this.x + width > window.innerWidth ) {
+      this.x = window.innerWidth - width;
       this.vx = -this.vx;
     }
 
-    if ( y < 0 ) {
-      y = 0;
+    if ( this.y < 0 ) {
+      this.y = 0;
       this.vy = -this.vy;
     }
 
-    if ( y + height > window.innerHeight ) {
-      y = window.innerHeight - height;
+    if ( this.y + height > window.innerHeight ) {
+      this.y = window.innerHeight - height;
       this.vy = -this.vy;
     }
 
-    this.x = x;
-    this.y = y;
+    var transform = 'translate3d(' +
+      this.x + 'px, ' +
+      this.y + 'px, ' +
+      '0)';
+
+    this.el.style.webkitTransform = transform;
+    this.el.style.transform = transform;
   };
-
-  // Switch to CSS translate at some point.
-  Object.defineProperty( Element.prototype, 'x', {
-    get: function() {
-      return this.el.offsetLeft;
-    },
-
-    set: function( x ) {
-      this.el.style.left = ( x || 0 ) + 'px';
-    }
-  });
-
-  Object.defineProperty( Element.prototype, 'y', {
-    get: function() {
-      return this.el.offsetTop;
-    },
-
-    set: function( y ) {
-      this.el.style.top = ( y || 0 ) + 'px';
-    }
-  });
-
-  Object.defineProperty( Element.prototype, 'width', {
-    get: function() {
-      return this.el.offsetWidth;
-    }
-  });
-
-  Object.defineProperty( Element.prototype, 'height', {
-    get: function() {
-      return this.el.offsetHeight;
-    }
-  });
 
   function update() {
     if ( !anim.running ) {
@@ -175,7 +153,6 @@
     while ( elementCount-- ) {
       element = Element.random();
       anim.elements.push( element );
-      document.body.appendChild( element.el );
     }
 
     update();
