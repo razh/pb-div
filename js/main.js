@@ -56,6 +56,11 @@
     anim.height = window.innerHeight;
   });
 
+  // Prevent scrolling on iOS devices.
+  window.addEventListener( 'touchmove', function( event ) {
+    event.preventDefault();
+  });
+
 
   function Element( options ) {
     options = options || {};
@@ -121,7 +126,6 @@
     if ( !dt ) {
       return;
     }
-
 
     var x = this.x;
     var y = this.y;

@@ -29,6 +29,11 @@
   }
 
 
+  // Prevent scrolling on iOS devices.
+  window.addEventListener( 'touchmove', function( event ) {
+    event.preventDefault();
+  });
+
   function Animation() {
     this.prevTime = Date.now();
     this.currTime = this.prevTime;
