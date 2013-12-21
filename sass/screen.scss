@@ -1,1 +1,19 @@
 @import "compass/reset";
+
+// Animation mixins.
+
+$div-size: 50px;
+
+body {
+  background-color: #f43;
+}
+
+div {
+  position: absolute;
+  width: $div-size;
+  height: $div-size;
+  background-color: #fff;
+}
+
+// We could use CSS animations to go from 0 to 100% left/top,
+// but we want to be a bit fancier.
