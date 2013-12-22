@@ -4,17 +4,7 @@
 @import "compass/css3/transform";
 @import "compass/css3/transition";
 
-// Animation mixins.
-@mixin keyframes($name) {
-  @-webkit-keyframes #{$name} { @content; }
-  @keyframes #{$name} { @content; }
-}
-
-@mixin animation($animation) {
-  -webkit-animation: #{$animation};
-          animation: #{$animation};
-}
-
+$transition: all 0.4s;
 $translate-center: translate3d(-50%, -50%, 0);
 
 $face-size: 100px;
@@ -58,18 +48,19 @@ body {
 
   background-color: #fff;
 
-  @include transition(all 0.5s);
+  @include transition($transition);
 
   .eye,
   .mouth,
   .shadow {
-    @include transition(all 0.3s);
-    @include backface-visibility(none);
+    @include transition($transition);
+    @include backface-visibility(hidden);
     @include transform(translateZ(1px));
   }
 
   .eye {
     position: absolute;
+    top: $eye-top;
     width: $eye-size;
     height: $eye-size;
     background-color: $dark-red;
@@ -77,12 +68,10 @@ body {
   }
 
   .eye-left {
-    top: $eye-top;
     left: $eye-horz-distance;
   }
 
   .eye-right {
-    top: $eye-top;
     right: $eye-horz-distance;
   }
 
@@ -105,27 +94,28 @@ body {
 
     margin-left: -$mouth-height;
 
-    @include border-radius(0 0 $mouth-height $mouth-height);
     background-color: $dark-red;
+    @include border-radius(0 0 $mouth-height $mouth-height);
   }
 
   .shadow {
     position: absolute;
-    background-color: #000;
+
     width: $face-size;
     height: $face-size;
+
     opacity: 0.2;
+    background-color: #000;
     @include transform(translate3d(0, $face-size, 0) rotateX(90deg));
   }
+}
 
-  &:active {
-    @include transform($translate-center scale($rect-size / $face-size) rotateY(0.5turn));
-    @include animation(none);
+.face-transition {
+  @include transform($translate-center scale($rect-size / $face-size) rotateY(0.5turn));
 
-    .eye,
-    .mouth,
-    .shadow {
-      opacity: 0;
-    }
+  .eye,
+  .mouth,
+  .shadow {
+    opacity: 0;
   }
 }

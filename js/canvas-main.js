@@ -1,12 +1,12 @@
 /*
   This is a simple demonstration of a possible avenue for a speed increase.
-  Whereas the plain CSS version is capabale of several hundred divs,
-  this version is capable of several thousand (of course, for the best
-  performance, we could use WebGL, but iOS doesn't support that right now.)
+  Whereas the plain CSS version is capable of several hundred divs,
+  this version can render several thousand elements (of course, for the best
+  performance, we could use WebGL, but iOS doesn't support that right now).
 
   For obvious reasons, we cannot use this with web content.
 
-  The code base between the CSS/canvas versions are similar enough that should
+  The code base between the CSS/canvas versions are similar enough that we should
   be able to merge them without much difficulty.
 */
 
@@ -28,11 +28,6 @@
     return Math.random() < 0.5 ? -1 : 1;
   }
 
-
-  // Prevent scrolling on iOS devices.
-  window.addEventListener( 'touchmove', function( event ) {
-    event.preventDefault();
-  });
 
   function Animation() {
     this.prevTime = Date.now();
@@ -62,8 +57,12 @@
       }
     }.bind( this );
 
+    this.touchHandler = function( event ) {
+      this.clickHandler( event.touches[0] );
+    }.bind( this );
+
     if ( window.ontouchstart !== undefined ) {
-      this.canvas.addEventListener( 'touchstart', this.clickHandler );
+      this.canvas.addEventListener( 'touchstart', this.touchHandler );
     } else {
       this.canvas.addEventListener( 'mousedown', this.clickHandler );
     }
@@ -73,6 +72,11 @@
     this.currTime = Date.now();
     var dt = this.currTime - this.prevTime;
     this.prevTime = this.currTime;
+
+    // Limit maximum frame time.
+    if ( dt > 1e2 ) {
+      dt = 1e2;
+    }
 
     // Milliseconds to seconds.
     dt *= 1e-3;

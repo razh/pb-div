@@ -63,15 +63,17 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
-/* line 5, ../sass/screen.scss */
+/* line 6, ../sass/screen.scss */
 body {
   background-color: #f43;
 }
 
-/* line 9, ../sass/screen.scss */
+/* line 10, ../sass/screen.scss */
 div {
   position: absolute;
   width: 50px;
   height: 50px;
+  margin-left: -25px;
+  margin-top: -25px;
   background-color: #fff;
 }

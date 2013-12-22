@@ -1,6 +1,7 @@
 @import "compass/reset";
 
 $div-size: 50px;
+$half-div-size: 0.5 * $div-size;
 
 body {
   background-color: #f43;
@@ -8,8 +9,13 @@ body {
 
 div {
   position: absolute;
+
   width: $div-size;
   height: $div-size;
+
+  margin-left: -$half-div-size;
+  margin-top: -$half-div-size;
+
   background-color: #fff;
 }
 

@@ -63,18 +63,18 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
-/* line 31, ../sass/intro.scss */
+/* line 21, ../sass/intro.scss */
 html, body {
   height: 100%;
 }
 
-/* line 35, ../sass/intro.scss */
+/* line 25, ../sass/intro.scss */
 body {
   overflow: hidden;
   background-color: #ff4433;
 }
 
-/* line 40, ../sass/intro.scss */
+/* line 30, ../sass/intro.scss */
 .container {
   position: relative;
   width: 100%;
@@ -91,7 +91,7 @@ body {
   perspective: 1000px;
 }
 
-/* line 48, ../sass/intro.scss */
+/* line 38, ../sass/intro.scss */
 .face {
   position: absolute;
   -webkit-transform: translate3d(-50%, -50%, 0) scale(1) rotateY(0turn);
@@ -109,33 +109,34 @@ body {
   width: 100px;
   height: 100px;
   background-color: #fff;
-  -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
-  -o-transition: all 0.5s;
-  transition: all 0.5s;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  transition: all 0.4s;
 }
-/* line 65, ../sass/intro.scss */
+/* line 55, ../sass/intro.scss */
 .face .eye,
 .face .mouth,
 .face .shadow {
-  -webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  -o-transition: all 0.3s;
-  transition: all 0.3s;
-  -webkit-backface-visibility: none;
-  -moz-backface-visibility: none;
-  -ms-backface-visibility: none;
-  -o-backface-visibility: none;
-  backface-visibility: none;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  transition: all 0.4s;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
   -webkit-transform: translateZ(1px);
   -moz-transform: translateZ(1px);
   -ms-transform: translateZ(1px);
   -o-transform: translateZ(1px);
   transform: translateZ(1px);
 }
-/* line 71, ../sass/intro.scss */
+/* line 61, ../sass/intro.scss */
 .face .eye {
   position: absolute;
+  top: 50px;
   width: 15px;
   height: 15px;
   background-color: #dd3322;
@@ -145,17 +146,15 @@ body {
   -o-border-radius: 50%;
   border-radius: 50%;
 }
-/* line 79, ../sass/intro.scss */
+/* line 70, ../sass/intro.scss */
 .face .eye-left {
-  top: 50px;
   left: 20px;
 }
-/* line 84, ../sass/intro.scss */
+/* line 74, ../sass/intro.scss */
 .face .eye-right {
-  top: 50px;
   right: 20px;
 }
-/* line 89, ../sass/intro.scss */
+/* line 78, ../sass/intro.scss */
 .face .mouth-container {
   position: relative;
   top: 0;
@@ -163,7 +162,7 @@ body {
   bottom: 0;
   left: 0;
 }
-/* line 97, ../sass/intro.scss */
+/* line 86, ../sass/intro.scss */
 .face .mouth {
   position: absolute;
   bottom: 10px;
@@ -171,39 +170,38 @@ body {
   width: 30px;
   height: 15px;
   margin-left: -15px;
+  background-color: #dd3322;
   -webkit-border-radius: 0 0 15px 15px;
   -moz-border-radius: 0 0 15px 15px;
   -ms-border-radius: 0 0 15px 15px;
   -o-border-radius: 0 0 15px 15px;
   border-radius: 0 0 15px 15px;
-  background-color: #dd3322;
 }
-/* line 112, ../sass/intro.scss */
+/* line 101, ../sass/intro.scss */
 .face .shadow {
   position: absolute;
-  background-color: #000;
   width: 100px;
   height: 100px;
   opacity: 0.2;
+  background-color: #000;
   -webkit-transform: translate3d(0, 100px, 0) rotateX(90deg);
   -moz-transform: translate3d(0, 100px, 0) rotateX(90deg);
   -ms-transform: translate3d(0, 100px, 0) rotateX(90deg);
   -o-transform: translate3d(0, 100px, 0) rotateX(90deg);
   transform: translate3d(0, 100px, 0) rotateX(90deg);
 }
-/* line 121, ../sass/intro.scss */
-.face:active {
+
+/* line 113, ../sass/intro.scss */
+.face-transition {
   -webkit-transform: translate3d(-50%, -50%, 0) scale(0.5) rotateY(0.5turn);
   -moz-transform: translate3d(-50%, -50%, 0) scale(0.5) rotateY(0.5turn);
   -ms-transform: translate3d(-50%, -50%, 0) scale(0.5) rotateY(0.5turn);
   -o-transform: translate3d(-50%, -50%, 0) scale(0.5) rotateY(0.5turn);
   transform: translate3d(-50%, -50%, 0) scale(0.5) rotateY(0.5turn);
-  -webkit-animation: none;
-  animation: none;
 }
-/* line 127, ../sass/intro.scss */
-.face:active .eye,
-.face:active .mouth,
-.face:active .shadow {
+/* line 118, ../sass/intro.scss */
+.face-transition .eye,
+.face-transition .mouth,
+.face-transition .shadow {
   opacity: 0;
 }
