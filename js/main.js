@@ -136,8 +136,8 @@ var AnimationCSS = (function( window, document, undefined ) {
     var y = this.y;
     var halfWidth = 0.5 * this.width;
     var halfHeight = 0.5 * this.height;
-    var windowWidth = anim.width;
-    var windowHeight = anim.height;
+    var windowWidth = this.parent.width;
+    var windowHeight = this.parent.height;
 
     x += this.vx * dt;
     y += this.vy * dt;
