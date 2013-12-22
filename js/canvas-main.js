@@ -10,26 +10,26 @@
   be able to merge them without much difficulty.
 */
 
-(function( window, document, undefined ) {
+/*global Shared*/
+/*exported AnimationCanvas*/
+var AnimationCanvas = (function( window, document, undefined ) {
   'use strict';
 
   // Constants.
   var RECT_SIZE = 50;
+  var RECT_COLOR = '#fff';
 
   // Global animation state.
   var anim;
 
-  // Same utilities. Sorry about the DRY.
-  function randomInt( min, max ) {
-    return Math.round( min + Math.random() * ( max - min ) );
-  }
+  var randomInt = Shared.randomInt;
+  var randomSign = Shared.randomSign;
 
-  function randomSign() {
-    return Math.random() < 0.5 ? -1 : 1;
-  }
+  function Animation( options ) {
+    options = options || {};
+    this.rectSize = options.rectSize !== undefined ? options.rectSize : RECT_SIZE;
+    this.rectColor = options.rectColor !== undefined ? options.rectColor : RECT_COLOR;
 
-
-  function Animation() {
     this.prevTime = Date.now();
     this.currTime = this.prevTime;
     this.running = true;
@@ -53,7 +53,7 @@
       }
 
       if ( el ) {
-        this.elements.push( new Rect( el.x, el.y, RECT_SIZE, RECT_SIZE ) );
+        this.elements.push( new Rect( el.x, el.y, this.rectSize, this.rectSize ) );
       }
     }.bind( this );
 
@@ -98,11 +98,9 @@
       element.draw( ctx );
     });
 
-    ctx.fillStyle = '#fff';
+    ctx.fillStyle = this.rectColor;
     ctx.fill();
   };
-
-  anim = new Animation();
 
 
   function Rect( x, y, width, height ) {
@@ -162,6 +160,9 @@
   }
 
   (function init() {
+    // Initialize global animaiton state.
+    anim = new Animation();
+
     document.body.appendChild( anim.canvas );
     anim.canvas.width = window.innerWidth;
     anim.canvas.height = window.innerHeight;
@@ -180,4 +181,7 @@
 
     tick();
   }) ();
+
+  Animation.Rect = Rect;
+  return Animation;
 }) ( window, document );

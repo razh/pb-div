@@ -19,42 +19,56 @@
  * - Only updating transform if the element had moved at least some minimum distance.
  */
 
-(function( window, document, undefined ) {
+/*global Shared*/
+/*exported AnimationCSS*/
+var AnimationCSS = (function( window, document, undefined ) {
   'use strict';
 
   // Global animation state.
   var anim;
 
-  // Utility functions.
-  // In the range [min, max).
-  function randomInt( min, max ) {
-    return Math.round( min + Math.random() * ( max - min ) );
-  }
-
-  function randomSign() {
-    return Math.random() < 0.5 ? -1 : 1;
-  }
-
+  var randomInt = Shared.randomInt;
+  var randomSign = Shared.randomSign;
 
   function Animation() {
     // We don't need the accuracy of performance.now().
     this.prevTime = Date.now();
     this.currTime = this.prevTime;
-
     this.running = true;
 
     this.elements = [];
 
     this.width = window.innerWidth;
     this.height = window.innerHeight;
+
+    window.addEventListener( 'resize', function() {
+      this.width = window.innerWidth;
+      this.height = window.innerHeight;
+    }.bind( this ));
   }
 
-  anim = new Animation();
+  Animation.prototype.update = function() {
+    if ( !this.running ) {
+      return;
+    }
 
-  window.addEventListener( 'resize', function() {
-    anim.width = window.innerWidth;
-    anim.height = window.innerHeight;
-  });
+    // Determine elapsed time.
+    this.currTime = Date.now();
+    var dt = this.currTime - this.prevTime;
+    this.prevTime = this.currTime;
+
+    // Limit maximum frame time.
+    if ( dt > 1e2 ) {
+      dt = 1e2;
+    }
+
+    // Milliseconds to seconds.
+    dt *= 1e-3;
+
+    this.elements.forEach(function( element ) {
+      element.update( dt );
+    });
+  };
 
 
   function Element( options ) {
@@ -81,6 +95,7 @@
 
     this.x = x;
     this.y = y;
+    this.parent = options.parent;
 
     // Prevent initial rendering at (0, 0) on iOS devices.
     this.setTransform();
@@ -95,25 +110,22 @@
     this.vy = randomSign() * randomInt( 20, 100 );
 
     this.clickHandler = function() {
+      if ( !this.parent ) {
+        return;
+      }
+
       var element = new Element({
         x: this.x,
-        y: this.y
+        y: this.y,
+        parent: this.parent
       });
 
-      anim.elements.push( element );
+      this.parent.elements.push( element );
     }.bind( this );
-
 
     var clickEvent = window.ontouchstart !== undefined ? 'touchstart' : 'mousedown';
     this.el.addEventListener( clickEvent, this.clickHandler );
   }
-
-  Element.random = function() {
-    return new Element({
-      x: randomInt( 0, window.innerWidth ),
-      y: randomInt( 0, window.innerHeight )
-    });
-  };
 
   Element.prototype.update = function( dt ) {
     if ( !dt ) {
@@ -168,40 +180,26 @@
     this.el.style.transform = transform;
   };
 
+
   function update() {
-    if ( !anim.running ) {
-      return;
-    }
-
-    // Determine elapsed time.
-    anim.currTime = Date.now();
-    var dt = anim.currTime - anim.prevTime;
-    anim.prevTime = anim.currTime;
-
-    // Limit maximum frame time.
-    if ( dt > 1e2 ) {
-      dt = 1e2;
-    }
-
-    // Milliseconds to seconds.
-    dt *= 1e-3;
-
-    anim.elements.forEach(function( element ) {
-      element.update( dt );
-    });
-
+    anim.update();
     window.requestAnimationFrame( update );
   }
 
-
   (function init() {
+    // Initialize global animation state.
+    anim = new Animation();
+
     var element = new Element({
         x: 0.5 * window.innerWidth,
-        y: 0.5 * window.innerHeight
+        y: 0.5 * window.innerHeight,
+        parent: anim
       });
 
     anim.elements.push( element );
     update();
   }) ();
 
+  Animation.Element = Element;
+  return Animation;
 }) ( window, document );

@@ -2,6 +2,10 @@
   'use strict';
 
   var faceEl = document.querySelector( '.face' );
+  if ( !faceEl ) {
+    return;
+  }
+
   var transitionClass = 'face-transition';
 
   function onTransitionEnd( event ) {
