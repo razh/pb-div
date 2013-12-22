@@ -1,0 +1,209 @@
+/* line 17, ../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, ../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 31, ../sass/intro.scss */
+html, body {
+  height: 100%;
+}
+
+/* line 35, ../sass/intro.scss */
+body {
+  overflow: hidden;
+  background-color: #ff4433;
+}
+
+/* line 40, ../sass/intro.scss */
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-perspective: 1000px;
+  -moz-perspective: 1000px;
+  -ms-perspective: 1000px;
+  -o-perspective: 1000px;
+  perspective: 1000px;
+}
+
+/* line 48, ../sass/intro.scss */
+.face {
+  position: absolute;
+  -webkit-transform: translate3d(-50%, -50%, 0) scale(1) rotateY(0turn);
+  -moz-transform: translate3d(-50%, -50%, 0) scale(1) rotateY(0turn);
+  -ms-transform: translate3d(-50%, -50%, 0) scale(1) rotateY(0turn);
+  -o-transform: translate3d(-50%, -50%, 0) scale(1) rotateY(0turn);
+  transform: translate3d(-50%, -50%, 0) scale(1) rotateY(0turn);
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  background-color: #fff;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+/* line 65, ../sass/intro.scss */
+.face .eye,
+.face .mouth,
+.face .shadow {
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+  -webkit-backface-visibility: none;
+  -moz-backface-visibility: none;
+  -ms-backface-visibility: none;
+  -o-backface-visibility: none;
+  backface-visibility: none;
+  -webkit-transform: translateZ(1px);
+  -moz-transform: translateZ(1px);
+  -ms-transform: translateZ(1px);
+  -o-transform: translateZ(1px);
+  transform: translateZ(1px);
+}
+/* line 71, ../sass/intro.scss */
+.face .eye {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-color: #dd3322;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+}
+/* line 79, ../sass/intro.scss */
+.face .eye-left {
+  top: 50px;
+  left: 20px;
+}
+/* line 84, ../sass/intro.scss */
+.face .eye-right {
+  top: 50px;
+  right: 20px;
+}
+/* line 89, ../sass/intro.scss */
+.face .mouth-container {
+  position: relative;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+/* line 97, ../sass/intro.scss */
+.face .mouth {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  width: 30px;
+  height: 15px;
+  margin-left: -15px;
+  -webkit-border-radius: 0 0 15px 15px;
+  -moz-border-radius: 0 0 15px 15px;
+  -ms-border-radius: 0 0 15px 15px;
+  -o-border-radius: 0 0 15px 15px;
+  border-radius: 0 0 15px 15px;
+  background-color: #dd3322;
+}
+/* line 112, ../sass/intro.scss */
+.face .shadow {
+  position: absolute;
+  background-color: #000;
+  width: 100px;
+  height: 100px;
+  opacity: 0.2;
+  -webkit-transform: translate3d(0, 100px, 0) rotateX(90deg);
+  -moz-transform: translate3d(0, 100px, 0) rotateX(90deg);
+  -ms-transform: translate3d(0, 100px, 0) rotateX(90deg);
+  -o-transform: translate3d(0, 100px, 0) rotateX(90deg);
+  transform: translate3d(0, 100px, 0) rotateX(90deg);
+}
+/* line 121, ../sass/intro.scss */
+.face:active {
+  -webkit-transform: translate3d(-50%, -50%, 0) scale(0.5) rotateY(0.5turn);
+  -moz-transform: translate3d(-50%, -50%, 0) scale(0.5) rotateY(0.5turn);
+  -ms-transform: translate3d(-50%, -50%, 0) scale(0.5) rotateY(0.5turn);
+  -o-transform: translate3d(-50%, -50%, 0) scale(0.5) rotateY(0.5turn);
+  transform: translate3d(-50%, -50%, 0) scale(0.5) rotateY(0.5turn);
+  -webkit-animation: none;
+  animation: none;
+}
+/* line 127, ../sass/intro.scss */
+.face:active .eye,
+.face:active .mouth,
+.face:active .shadow {
+  opacity: 0;
+}

@@ -1,0 +1,19 @@
+!!! 5
+mixin face
+  .eye.eye-right
+  .eye.eye-left
+  .mouth
+  .shadow
+
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    title div-intro
+
+    link(rel='stylesheet', media='screen, projection', href='./stylesheets/intro.css')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, user-scalable=no')
+  body(ontouchstart='')
+    .container
+      .face
+        +face
+
