@@ -1,0 +1,21 @@
+@import "compass/css3/box-shadow";
+
+$div-size: 50px;
+
+$outer-shadow-color: rgba(0, 0, 0, 0.2);
+$outer-shadow-radius: 0.2 * $div-size;
+$outer-shadow: 0 0 $outer-shadow-radius $outer-shadow-color;
+
+$inner-shadow-color: rgba(0, 0, 0, 0.1);
+$inner-shadow-radius: -0.1 * $div-size;
+$inner-shadow: inset $inner-shadow-radius $inner-shadow-radius $inner-shadow-color;
+
+
+div {
+  border-radius: 50%;
+
+  @include box-shadow(
+    $outer-shadow,
+    $inner-shadow
+  );
+}

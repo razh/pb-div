@@ -1,0 +1,7 @@
+/* line 14, ../sass/circle.scss */
+div {
+  border-radius: 50%;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2), inset -5px -5px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2), inset -5px -5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2), inset -5px -5px rgba(0, 0, 0, 0.1);
+}
