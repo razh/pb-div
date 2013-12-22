@@ -11,8 +11,6 @@
   function onTransitionEnd( event ) {
     if ( event.target === faceEl ) {
       faceEl.removeEventListener( 'transitionend', onTransitionEnd );
-      faceEl.classList.remove( transitionClass );
-
       window.location = 'index.html';
     }
   }
