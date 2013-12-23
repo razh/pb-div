@@ -74,7 +74,7 @@ var AnimationCSS = (function( window, document, undefined ) {
   function Element( options ) {
     options = options || {};
 
-    var el = options.el || '';
+    var el = options.el;
     var x = options.x || 0;
     var y = options.y || 0;
 
@@ -86,12 +86,11 @@ var AnimationCSS = (function( window, document, undefined ) {
       this.el = el;
     } else {
       this.el = document.createElement( 'div' );
+      // Only so we can determine the element dimensions.
+      // This heavily impacts performance if we are appending >500 elements.
+      // Elements in document fragments do not have styles computed.
+      document.body.appendChild( this.el );
     }
-
-    // Only so we can determine the element dimensions.
-    // This heavily impacts performance if we are appending >500 elements.
-    // Elements in document fragments do not have styles computed.
-    document.body.appendChild( this.el );
 
     this.x = x;
     this.y = y;
